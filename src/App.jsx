@@ -42,6 +42,7 @@ const NO_FOOTER_PATHS = ['/notifications', '/loyalty-points', '/account', '/acti
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
+
   useEffect(() => {
     if (hash) {
       const timer = setTimeout(() => {
@@ -49,9 +50,12 @@ function ScrollToTop() {
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 150);
       return () => clearTimeout(timer);
+    } else {
+      // Force instant scroll to top on page load
+      window.scrollTo(0, 0);
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, [pathname, hash]);
+
   return null;
 }
 
@@ -101,12 +105,12 @@ function App() {
   return (
     <HelmetProvider>
       <CartProvider>
-        <Router>
+        <Router basename="/The-regal-hotel">
           <ScrollToTop />
           <Preloader />
           <Helmet>
-            <title>Opal Crest Hotel | Luxury Rooms & Suites</title>
-            <meta name="description" content="Experience ultimate luxury and comfort at Opal Crest Hotel." />
+            <title>The Regal Hotel & Residences | Luxury Rooms & Suites</title>
+            <meta name="description" content="Experience ultimate luxury and comfort at The Regal Hotel." />
           </Helmet>
           <LayoutWrapper />
         </Router>
