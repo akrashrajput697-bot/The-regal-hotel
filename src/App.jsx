@@ -109,8 +109,24 @@ function App() {
           <ScrollToTop />
           <Preloader />
           <Helmet>
+            {/* Standard SEO Meta Tags */}
             <title>The Regal Hotel & Residences | Luxury Rooms & Suites</title>
-            <meta name="description" content="Experience ultimate luxury and comfort at The Regal Hotel." />
+            <meta name="description" content="Experience ultimate luxury and comfort at The Regal Hotel & Residences. Book premium rooms, enjoy gourmet dining, and explore exclusive amenities." />
+            <meta name="keywords" content="The Regal Hotel, Luxury Hotel, Hotel Reservation, Suites, Islamabad Hotel, Room Booking" />
+            <meta name="author" content="The Regal Hotel & Residences" />
+
+            {/* Open Graph Meta Tags (For WhatsApp, Facebook, LinkedIn previews) */}
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://akrashrajput697-bot.github.io/The-regal-hotel/" />
+            <meta property="og:title" content="The Regal Hotel & Residences | Luxury Rooms & Suites" />
+            <meta property="og:description" content="Experience ultimate luxury and comfort at The Regal Hotel & Residences. Book your stay today." />
+            <meta property="og:image" content="https://akrashrajput697-bot.github.io/The-regal-hotel/og-image.jpg" />
+
+            {/* Twitter Card Meta Tags */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="The Regal Hotel & Residences" />
+            <meta name="twitter:description" content="Experience ultimate luxury and comfort at The Regal Hotel & Residences." />
+            <meta name="twitter:image" content="https://akrashrajput697-bot.github.io/The-regal-hotel/og-image.jpg" />
           </Helmet>
           <LayoutWrapper />
         </Router>
