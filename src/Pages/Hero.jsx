@@ -97,13 +97,14 @@ function Hero() {
 
   return (
     <section className="regal-hero-section">
-      {sliderImages.map((image, index) => (
-        <div
-          key={index}
-          className={`hero-slide ${index === currentIndex ? 'active' : ''}`}
-          style={{ backgroundImage: `url(${image})` }}
-        />
-      ))}
+      <img
+        src={sliderImages[currentIndex]}
+        alt="Hero Background"
+        className="hero-background-image"
+      />  
+      
+    
+    
 
       <div className="hero-overlay"></div>
 
@@ -116,7 +117,6 @@ function Hero() {
 
         {/* Booking Bar */}
         <div className="hero-booking-bar">
-          
           {/* Check-In & Check-Out */}
           <div className="booking-field date-picker-box" style={{ position: 'relative' }} ref={calendarRef}>
             <label>CHECK-IN & CHECK-OUT</label>
@@ -136,7 +136,7 @@ function Hero() {
                   months={2}
                   ranges={state}
                   direction="horizontal"
-                  rangeColors={['#bf9c6f']} 
+                  rangeColors={['#bf9c6f']}
                   inputRanges={[]}
                 />
               </div>
@@ -146,8 +146,8 @@ function Hero() {
           {/* Rooms Custom Dropdown with +/- */}
           <div className="booking-field custom-select-box" style={{ position: 'relative' }} ref={roomsRef}>
             <label>ROOMS</label>
-            <div 
-              className="select-display-box" 
+            <div
+              className="select-display-box"
               onClick={() => setShowRoomsDropdown(prev => !prev)}
             >
               {roomsCount} {roomsCount === 1 ? 'Room' : 'Rooms'} ▼
@@ -156,7 +156,6 @@ function Hero() {
             {showRoomsDropdown && (
               <div className="counter-popup-menu">
                 <div className="counter-row">
-                  
                   <div className="counter-btns">
                     <button type="button" onClick={() => setRoomsCount(prev => Math.max(1, prev - 1))}>-</button>
                     <span>{roomsCount}</span>
@@ -170,8 +169,8 @@ function Hero() {
           {/* Adults Custom Dropdown with +/- */}
           <div className="booking-field custom-select-box" style={{ position: 'relative' }} ref={adultsRef}>
             <label>ADULTS</label>
-            <div 
-              className="select-display-box" 
+            <div
+              className="select-display-box"
               onClick={() => setShowAdultsDropdown(prev => !prev)}
             >
               {adultsCount} {adultsCount === 1 ? 'Adult' : 'Adults'} ▼
@@ -180,7 +179,6 @@ function Hero() {
             {showAdultsDropdown && (
               <div className="counter-popup-menu">
                 <div className="counter-row">
-                 
                   <div className="counter-btns">
                     <button type="button" onClick={() => setAdultsCount(prev => Math.max(1, prev - 1))}>-</button>
                     <span>{adultsCount}</span>
@@ -194,8 +192,8 @@ function Hero() {
           {/* Children Custom Dropdown with +/- */}
           <div className="booking-field custom-select-box" style={{ position: 'relative' }} ref={childrenRef}>
             <label>CHILDREN</label>
-            <div 
-              className="select-display-box" 
+            <div
+              className="select-display-box"
               onClick={() => setShowChildrenDropdown(prev => !prev)}
             >
               {childrenCount} {childrenCount === 1 ? 'Child' : 'Children'} ▼
@@ -204,7 +202,6 @@ function Hero() {
             {showChildrenDropdown && (
               <div className="counter-popup-menu">
                 <div className="counter-row">
-               
                   <div className="counter-btns">
                     <button type="button" onClick={() => setChildrenCount(prev => Math.max(0, prev - 1))}>-</button>
                     <span>{childrenCount}</span>
@@ -221,5 +218,7 @@ function Hero() {
     </section>
   );
 }
+
+
 
 export default Hero;
