@@ -14,7 +14,8 @@ export function CartProvider({ children }) {
           item.id === room.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      return [...prev, { ...room, quantity: 1, nights: 2 }];
+      // Nights ko 1 kar diya hai taake calculation bilkul exact aye
+      return [...prev, { ...room, quantity: 1, nights: room.nights || 1 }];
     });
     setCartOpen(true);
   };
@@ -37,7 +38,7 @@ export function CartProvider({ children }) {
 
   const proceedToCheckout = () => {
     setCartOpen(false);
-    window.location.href = '/reservation'; // Yeh bina kisi error ke seedha reservation page par le jayega
+    window.location.href = '/reservation'; // Direct reservation page redirect
   };
 
   return (

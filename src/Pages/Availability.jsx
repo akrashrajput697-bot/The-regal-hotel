@@ -1,22 +1,18 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 import '../Style/Availability.css';
 
 const DAY = 86400000;
 const img = (id, w = 900) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
-/* ---------- Rooms data (price, left, images apni marzi se badal len) ---------- */
+/* ---------- Rooms data ---------- */
 const ROOMS = [
-    { id: 'deluxe-double', name: 'Deluxe Double Room', type: 'Deluxe', price: 45000, left: 4, max: 2, size: '32 m²', bed: '1 double bed',image: 'https://www.hotelcrowncp.com/assets/images/rooms/deluxe%20double/1.webp', path: '/deluxe-double', perks: ['Free Wi-Fi', 'Air conditioning', 'City view'] },
-
+    { id: 'deluxe-double', name: 'Deluxe Double Room', type: 'Deluxe', price: 45000, left: 4, max: 2, size: '32 m²', bed: '1 double bed', image: 'https://www.hotelcrowncp.com/assets/images/rooms/deluxe%20double/1.webp', path: '/deluxe-double', perks: ['Free Wi-Fi', 'Air conditioning', 'City view'] },
     { id: 'deluxe-twin', name: 'Deluxe Twin Room', type: 'Deluxe', price: 55000, left: 3, max: 2, size: '32 m²', bed: '2 single beds',  image: 'https://www.hotelcrowncp.com/assets/images/rooms/deluxe%20twin/1.webp', path: '/deluxe-twin', perks: ['Free Wi-Fi', 'Air conditioning', 'Work desk'] },
-
     { id: 'deluxe-family', name: 'Deluxe Family Room', type: 'Deluxe', price: 65000, left: 2, max: 4, size: '48 m²', bed: '1 double + 2 single', image: 'https://api.envoyhotel.com/uploads/1779192228389-Deluxe_Family_Room_(5).jpg', path: '/deluxe-family', perks: ['Free Wi-Fi', 'Sitting area', 'Breakfast'] },
-
     { id: 'executive-king', name: 'Executive King Room', type: 'Executive', price: 75000, left: 2, max: 3, size: '42 m²', bed: '1 king bed',  image: 'https://api.envoyhotel.com/uploads/1779192349166-Executive_King_Room_(3).jpg',  path: '/executive-king', perks: ['Lounge access', 'Marble bath', 'Breakfast'] },
-
     { id: 'executive-twin', name: 'Executive Twin Room', type: 'Executive', price: 85000, left: 1, max: 2, size: '40 m²', bed: '2 single beds', image: 'https://www.hotelcrowncp.com/assets/images/rooms/Executive%20grace%20twin/1.webp', path: '/executive-twin', perks: ['Lounge access', 'City view', 'Breakfast'] },
-
     { id: 'premier-suite', name: 'Premier Suite', type: 'Suite', price: 95000, left: 1, max: 4, size: '80 m²', bed: '1 king bed + lounge', image: 'https://api.envoyhotel.com/uploads/1779192683149-Premier_Suite_Room_(2).jpg',  path: '/premier-suite', perks: ['Private lounge', 'Butler service', 'Panoramic view'] },
 ];
 
@@ -24,7 +20,6 @@ const FILTERS = ['All', 'Deluxe', 'Executive', 'Suite'];
 const fmt = (d) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 const pkr = (n) => `PKR ${n.toLocaleString('en-US')}`;
 
-// Date -> YYYY-MM-DD (local time), the format the Reservation page expects
 const iso = (d) =>
     `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
@@ -45,6 +40,9 @@ function Reveal({ children, delay = 0 }) {
 
 function Availability() {
     const { state } = useLocation();
+    const navigate = useNavigate();
+    const { addToCart } = useCart();
+
     const start = state?.startDate ? new Date(state.startDate) : new Date();
     const end = state?.endDate ? new Date(state.endDate) : new Date(Date.now() + DAY);
     const nights = Math.max(1, Math.round((end - start) / DAY));
@@ -73,7 +71,6 @@ function Availability() {
 
     const availableCount = results.filter((r) => r.available).length;
 
-    // "Book now" opens the Reservation page with the room and your search already filled in
     const bookUrl = (r) =>
         `/reservation?${new URLSearchParams({
             room: r.id,
@@ -83,6 +80,11 @@ function Availability() {
             children: String(children),
             rooms: String(rooms),
         }).toString()}`;
+
+    const handleAddToCart = (e, r) => {
+        e.stopPropagation(); // Card click hone par detail page khulne se rokay ga
+        addToCart(r);
+    };
 
     return (
         <div className="av-page">
@@ -142,7 +144,11 @@ function Availability() {
                     <div className="av-list">
                         {results.map((r, i) => (
                             <Reveal key={r.id} delay={i * 80}>
-                                <article className={`av-card ${r.available ? '' : 'is-sold'}`}>
+                                <article 
+                                    className={`av-card ${r.available ? '' : 'is-sold'}`}
+                                    onClick={() => navigate(r.path)}
+                                    style={{ cursor: 'pointer' }}
+                                >
                                     <div className="av-media">
                                         <img src={r.image} alt={r.name} loading="lazy" onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }} />
                                         <span className={`av-badge ${r.available ? (r.left <= 2 ? 'warn' : 'ok') : 'out'}`}>
@@ -163,8 +169,14 @@ function Availability() {
                                                 <strong>{pkr(r.price)}</strong><span> / night</span>
                                                 <small>{pkr(r.price * nights * rooms)} total · {nights} night{nights > 1 ? 's' : ''}</small>
                                             </div>
-                                            <div className="av-actions">
-                                                <Link className="av-btn av-btn-ghost" to={r.path}>Details</Link>
+                                            <div className="av-actions" onClick={(e) => e.stopPropagation()}>
+                                                <button 
+                                                    type="button" 
+                                                    className="av-btn av-btn-ghost" 
+                                                    onClick={(e) => handleAddToCart(e, r)}
+                                                >
+                                                    Add to Cart
+                                                </button>
                                                 {r.available ? (
                                                     <Link className="av-btn av-btn-primary" to={bookUrl(r)}>Book now</Link>
                                                 ) : (
@@ -179,7 +191,6 @@ function Availability() {
                     </div>
                 )}
             </div>
-
         </div>
     );
 }
