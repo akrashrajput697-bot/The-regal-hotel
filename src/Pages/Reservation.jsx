@@ -557,10 +557,10 @@ function Reservation() {
   return (
     <main className="rsv-page">
       <Helmet>
-        <title>Reserve Your Stay | The Regal Hotel & Residences</title>
+        <title>Book Your Stay & Room Reservation | The Regal Hotel & Residences</title>
         <meta
           name="description"
-          content="Reserve your luxury room or suite at The Regal Hotel & Residences. Choose your dates, room and extras, with best price guarantee and no online payment required."
+          content="Reserve your luxury room or suite at The Regal Hotel & Residences. Easy online booking, a best-rate guarantee, and flexible payment options."
         />
         <meta
           name="keywords"
@@ -570,21 +570,6 @@ function Reservation() {
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`${SITE_URL}/reservation`} />
 
-        <meta property="og:title" content="Reserve Your Stay | The Regal Hotel & Residences" />
-        <meta
-          property="og:description"
-          content="Choose your dates, pick a luxury room or suite and reserve your stay at The Regal in a few easy steps."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${SITE_URL}/reservation`} />
-        <meta property="og:image" content={ROOMS[0].image} />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Reserve Your Stay | The Regal Hotel & Residences" />
-        <meta name="twitter:description" content="Reserve your luxury room or suite at The Regal in a few easy steps." />
-        <meta name="twitter:image" content={ROOMS[0].image} />
-
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
       {/* ---------------- HERO ---------------- */}

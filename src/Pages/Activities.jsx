@@ -1,96 +1,113 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import '../Style/Activities.css';
+import '../Style/Gym.css';
 import Footer from '../component/Footer';
 
-const SLIDE_MS = 3000; // har 3 second baad image change
-const WHATSAPP = '923000000000'; // country code ke saath, bina + ke
+const px = (id, w = 1000) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
-/* ---------- Data (Direct Image Links) ---------- */
-const activities = [
+/* ---------- Data (yahan se sab kuch badal sakte ho) ---------- */
+const hours = [
+  { label: 'Open daily', time: '5:00 AM - 11:00 PM' },
+  { label: 'Quietest hours', time: '10:00 AM - 2:00 PM' },
+  { label: 'Hotel guests', time: 'Free access' },
+  { label: 'Towels and water', time: 'Provided' },
+];
+
+const zones = [
   {
-    id: 'snooker',
-    name: 'Snooker Lounge',
-    short: 'Full-size tables and a quiet lounge.',
-    tagline: 'Chalk up and take your shot',
-    desc: 'A calm, well-lit room with full-size tournament tables, a small bar counter and comfortable seating for spectators. Come for a casual frame with friends or practise with one of our markers.',
-    images: [
-      'https://images.pexels.com/photos/15473886/pexels-photo-15473886.jpeg?auto=compress&cs=tinysrgb&w=1000',
-      'https://images.pexels.com/photos/5055424/pexels-photo-5055424.jpeg?auto=compress&cs=tinysrgb&w=1000',
-      'https://images.pexels.com/photos/13291440/pexels-photo-13291440.jpeg?auto=compress&cs=tinysrgb&w=1000'
-    ],
-    facts: [
-      { label: 'Timings', value: '2:00 PM - 1:00 AM' },
-      { label: 'Tables', value: '3 full-size tables' },
-      { label: 'Rate', value: 'PKR 1,200 / hour' },
-    ],
-    highlights: [
-      'Tournament-grade tables and cues',
-      'Coaching with a pro marker',
-      'Private booking for groups',
-      'Snacks and drinks at your table',
-    ],
-    rules: ['Please book a table a few hours ahead on weekends.', 'Smart casual dress, no outdoor shoes on the tables area.'],
+    name: 'Cardio Floor',
+    text: 'Treadmills, bikes, ellipticals and rowers, each with its own screen and charging port.',
+    img: px(1954524),
   },
   {
-    id: 'pool',
-    name: 'Swimming Pool',
-    short: 'Heated rooftop pool, kids section and sun deck.',
-    tagline: 'Slow mornings, cool evenings',
-    desc: 'A magnificent rooftop pool surrounded by a sun deck and loungers, offering a panoramic view. Lifeguards are on duty during every opening hour, and towels are provided poolside.',
-    images: [
-      'https://images.unsplash.com/photo-1774284498049-eee34f796ce7?q=80&w=871&auto=format&fit=crop',
-      'https://images.pexels.com/photos/2064706/pexels-photo-2064706.jpeg?auto=compress&cs=tinysrgb&w=1000',
-      'https://images.pexels.com/photos/24805046/pexels-photo-24805046.jpeg?auto=compress&cs=tinysrgb&w=1000'
-    ],
-    facts: [
-      { label: 'Timings', value: '6:00 AM - 9:00 PM' },
-      { label: 'Depth', value: '0.9 m to 1.8 m' },
-      { label: 'Hotel guests', value: 'Free access' },
-    ],
-    highlights: [
-      'Rooftop views with heated water',
-      'Separate kids pool',
-      'Poolside towels and loungers',
-      'Lifeguard on duty',
-    ],
-    rules: ['Shower before entering the pool.', 'Proper swimwear is required.', 'Children under 12 must be with an adult.'],
+    name: 'Free Weights',
+    text: 'Dumbbells up to 50 kg, adjustable benches, squat racks and a full barbell area.',
+    img: px(841130),
   },
   {
-    id: 'spa',
-    name: 'Spa Centre',
-    short: 'Massage, facials and steam room.',
-    tagline: 'Slow down and let go',
-    desc: 'Quiet treatment rooms, soft lighting and trained therapists. Start with a steam session, then choose a massage or facial that suits how you feel today. Couples rooms are available on request.',
-    images: [
-      'https://plus.unsplash.com/premium_photo-1723489360240-e1896c1af32a?q=80&w=870&auto=format&fit=crop',
-      'https://images.pexels.com/photos/35495081/pexels-photo-35495081.jpeg?auto=compress&cs=tinysrgb&w=1000',
-      'https://images.pexels.com/photos/7789646/pexels-photo-7789646.jpeg?auto=compress&cs=tinysrgb&w=1000'
-    ],
-    facts: [
-      { label: 'Timings', value: '10:00 AM - 9:00 PM' },
-      { label: 'Treatment rooms', value: '4 rooms, 1 couples room' },
-      { label: 'Steam room', value: 'Free with any treatment' },
-    ],
-    highlights: [
-      'Certified therapists',
-      'Natural oils and products',
-      'Couples treatment room',
-      'Complimentary herbal tea after your session',
-    ],
-    rules: ['Please arrive 10 minutes before your appointment.', 'Let us know about allergies or injuries when you book.'],
-    menu: [
-      { name: 'Signature Relaxing Massage', time: '60 min', price: 'PKR 7,500' },
-      { name: 'Deep Tissue Massage', time: '60 min', price: 'PKR 8,500' },
-      { name: 'Hydrating Facial', time: '45 min', price: 'PKR 6,000' },
-      { name: 'Hot Stone Therapy', time: '75 min', price: 'PKR 9,500' },
-      { name: 'Couples Spa Ritual', time: '90 min', price: 'PKR 18,000' },
-    ],
+    name: 'Studio',
+    text: 'A bright, mirrored room for yoga, stretching and small group classes.',
+    img: px(1552242),
   },
 ];
 
+const schedule = {
+  Mon: [
+    { time: '6:30 AM', name: 'Morning Yoga', coach: 'Ayesha', level: 'All levels' },
+    { time: '5:30 PM', name: 'HIIT Circuit', coach: 'Bilal', level: 'Intermediate' },
+    { time: '7:00 PM', name: 'Core and Stretch', coach: 'Sana', level: 'All levels' },
+  ],
+  Tue: [
+    { time: '7:00 AM', name: 'Spin Ride', coach: 'Bilal', level: 'All levels' },
+    { time: '6:00 PM', name: 'Strength Basics', coach: 'Hamza', level: 'Beginner' },
+  ],
+  Wed: [
+    { time: '6:30 AM', name: 'Morning Yoga', coach: 'Ayesha', level: 'All levels' },
+    { time: '5:30 PM', name: 'Boxing Fit', coach: 'Hamza', level: 'Intermediate' },
+    { time: '7:00 PM', name: 'Pilates', coach: 'Sana', level: 'All levels' },
+  ],
+  Thu: [
+    { time: '7:00 AM', name: 'Spin Ride', coach: 'Bilal', level: 'All levels' },
+    { time: '6:00 PM', name: 'HIIT Circuit', coach: 'Bilal', level: 'Intermediate' },
+  ],
+  Fri: [
+    { time: '6:30 AM', name: 'Morning Yoga', coach: 'Ayesha', level: 'All levels' },
+    { time: '5:00 PM', name: 'Strength Basics', coach: 'Hamza', level: 'Beginner' },
+  ],
+  Sat: [
+    { time: '9:00 AM', name: 'Weekend Flow Yoga', coach: 'Ayesha', level: 'All levels' },
+    { time: '10:30 AM', name: 'Boxing Fit', coach: 'Hamza', level: 'Intermediate' },
+    { time: '5:00 PM', name: 'Stretch and Relax', coach: 'Sana', level: 'All levels' },
+  ],
+  Sun: [{ time: '9:30 AM', name: 'Gentle Yoga', coach: 'Ayesha', level: 'All levels' }],
+};
+
+const plans = [
+  {
+    name: 'Day Pass',
+    price: 'PKR 1,500',
+    per: '/ visit',
+    note: 'For visitors who are not staying with us.',
+    perks: ['Full gym floor access', 'Towel and water', 'Locker for the day'],
+  },
+  {
+    name: 'Monthly',
+    price: 'PKR 15,000',
+    per: '/ month',
+    note: 'Our most chosen plan for local members.',
+    perks: [
+      'Unlimited gym access',
+      'All group classes included',
+      'Free fitness assessment',
+      'Steam room access',
+    ],
+    featured: true,
+  },
+  {
+    name: 'Personal Training',
+    price: 'PKR 3,500',
+    per: '/ session',
+    note: 'One to one with a certified coach.',
+    perks: ['Custom workout plan', 'Form and technique coaching', 'Progress tracking'],
+  },
+];
+
+const coaches = [
+  { name: 'Hamza Raza', role: 'Strength and boxing coach' },
+  { name: 'Ayesha Khan', role: 'Yoga instructor' },
+  { name: 'Bilal Ahmed', role: 'Cardio and HIIT coach' },
+];
+
+const faqs = [
+  { q: 'Is the gym free for hotel guests?', a: 'Yes. Guests staying at The Regal can use the gym, studio and steam room at no extra charge during their stay.' },
+  { q: 'Do I need to book a class?', a: 'Group classes are first come, first served. For personal training, please book at the front desk or call us a day ahead.' },
+  { q: 'What should I bring?', a: 'Just your workout clothes and indoor sports shoes. We provide towels, water and lockers.' },
+  { q: 'Is there an age limit?', a: 'The gym is open to guests aged 16 and above. Younger guests may use the studio with a parent present.' },
+];
+
 /* ---------- Helpers ---------- */
-function useReveal(threshold = 0.12) {
+function Reveal({ children, className = '', delay = 0 }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -104,21 +121,16 @@ function useReveal(threshold = 0.12) {
           io.disconnect();
         }
       },
-      { threshold }
+      { threshold: 0.15 }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [threshold]);
+  }, []);
 
-  return [ref, visible];
-}
-
-function Reveal({ children, className = '', delay = 0 }) {
-  const [ref, visible] = useReveal();
   return (
     <div
       ref={ref}
-      className={`ac-reveal ${visible ? 'ac-in' : ''} ${className}`}
+      className={`gy-reveal ${visible ? 'gy-in' : ''} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -126,211 +138,217 @@ function Reveal({ children, className = '', delay = 0 }) {
   );
 }
 
-/* Auto-sliding gallery: har 3 second, hover par ruk jata hai */
-function Slider({ images, alt }) {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const total = images.length;
-
-  useEffect(() => {
-    if (paused || total < 2) return;
-    const t = setTimeout(() => setActive((i) => (i + 1) % total), SLIDE_MS);
-    return () => clearTimeout(t);
-  }, [active, paused, total]);
-
-  return (
-    <div
-      className="ac-gallery"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="ac-stage">
-        {images.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt={`${alt} - view ${i + 1}`}
-            className={`ac-slide ${i === active ? 'is-active' : ''}`}
-            loading="lazy"
-            onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
-          />
-        ))}
-        <span className="ac-counter">{active + 1} / {total}</span>
-        {total > 1 && (
-          <div className="ac-progress" aria-hidden="true">
-            <span
-              key={`${active}-${paused}`}
-              className={`ac-progress-bar ${paused ? 'is-paused' : ''}`}
-              style={{ animationDuration: `${SLIDE_MS}ms` }}
-            />
-          </div>
-        )}
-      </div>
-      <div className="ac-thumbs">
-        {images.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            className={`ac-thumb ${i === active ? 'is-active' : ''}`}
-            onClick={() => setActive(i)}
-            aria-label={`Show image ${i + 1}`}
-          >
-            <img src={src} alt="" onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }} />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ActivityBlock({ a, reversed }) {
-  const waText = encodeURIComponent(`Hello, I would like to book: ${a.name}`);
-  return (
-    <section className="ac-block" id={a.id}>
-      <Reveal className={`ac-card ${reversed ? 'ac-reversed' : ''}`}>
-        <Slider images={a.images} alt={a.name} />
-
-        <div className="ac-info">
-          <span className="ac-kicker">{a.tagline}</span>
-          <h2>{a.name}</h2>
-          <p className="ac-desc">{a.desc}</p>
-
-          <div className="ac-facts">
-            {a.facts.map((f) => (
-              <div key={f.label} className="ac-fact">
-                <span>{f.label}</span>
-                <strong>{f.value}</strong>
-              </div>
-            ))}
-          </div>
-
-          <ul className="ac-list">
-            {a.highlights.map((h) => (
-              <li key={h}>
-                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" /></svg>
-                {h}
-              </li>
-            ))}
-          </ul>
-
-          {a.menu && (
-            <div className="ac-menu">
-              <h3>Treatments</h3>
-              <ul>
-                {a.menu.map((m) => (
-                  <li key={m.name}>
-                    <div className="ac-menu-name">
-                      <strong>{m.name}</strong>
-                      <span>{m.time}</span>
-                    </div>
-                    <span className="ac-menu-dots" aria-hidden="true" />
-                    <span className="ac-menu-price">{m.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="ac-rules">
-            <strong>Good to know</strong>
-            <ul>
-              {a.rules.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="ac-actions">
-            <a
-              className="ac-btn ac-btn-primary"
-              href={`https://wa.me/${WHATSAPP}?text=${waText}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Book on WhatsApp
-            </a>
-            <a className="ac-btn ac-btn-ghost" href="#contact-us">Ask a question</a>
-          </div>
-        </div>
-      </Reveal>
-    </section>
-  );
-}
+const initials = (name) =>
+  name
+    .split(' ')
+    .map((w) => w[0])
+    .join('');
 
 /* ---------- Page ---------- */
-function Activities() {
+function Gym() {
+  const days = Object.keys(schedule);
+  const todayIdx = (new Date().getDay() + 6) % 7; // Mon = 0
+  const [day, setDay] = useState(days[todayIdx]);
+  const [openFaq, setOpenFaq] = useState(0);
+
   return (
-    <div className="activities-page">
+    <div className="gym-page">
       <Helmet>
-        <title>Leisure Activities, Spa & Pool | The Regal Hotel & Residences</title>
-        <meta name="description" content="Explore leisure activities at The Regal in Islamabad, featuring a snooker lounge, rooftop swimming pool, and relaxing spa treatments." />
-        <meta name="keywords" content="hotel activities, snooker lounge, rooftop swimming pool, spa centre, massage, islamabad hotel, the regal residences" />
+        <title>Fitness Centre & Gym | The Regal Hotel & Residences</title>
+        <meta name="description" content="Train at The Regal Fitness Centre in Islamabad featuring modern cardio equipment, free weights, a yoga studio, daily group classes, and personal training options." />
+        <meta name="keywords" content="hotel gym islamabad, fitness centre, gym membership, yoga classes, personal training, the regal residences" />
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/activities" />
-
-        <meta property="og:title" content="Leisure Activities, Spa & Pool | The Regal Hotel & Residences" />
-        <meta property="og:description" content="Play snooker, swim in the rooftop pool, or unwind at our spa centre during your stay at The Regal Hotel." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/activities" />
-        <meta property="og:image" content="https://images.pexels.com/photos/15473886/pexels-photo-15473886.jpeg?auto=compress&cs=tinysrgb&w=1000" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Leisure Activities, Spa & Pool | The Regal Hotel & Residences" />
-        <meta name="twitter:description" content="Discover our snooker lounge, swimming pool, and luxury spa treatments in Islamabad." />
-        <meta name="twitter:image" content="https://images.pexels.com/photos/15473886/pexels-photo-15473886.jpeg?auto=compress&cs=tinysrgb&w=1000" />
+        <link rel="canonical" href="https://yourdomain.com/gym" />
       </Helmet>
 
       {/* Hero */}
       <section className="room-inner-hero" aria-labelledby="hero-title">
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <span className="hero-kicker">The Regal Leisure</span>
-          <h1 id="hero-title">Activities</h1>
-          <p>Play a frame of snooker, swim a few laps or unwind at the spa. Everything is under one roof.</p>
+          <span className="hero-kicker">The Regal Wellness</span>
+          <h1 id="hero-title">Fitness Centre</h1>
+          <p>Modern equipment, calm studio space and friendly coaches, open from early morning to late night.</p>
+          <div className="hero-badges">
+            <a href="#classes" className="gy-hero-btn">See class schedule</a>
+            <a href="#plans" className="gy-hero-btn gy-hero-btn-ghost">Membership</a>
+          </div>
         </div>
       </section>
 
-      {/* Quick nav cards */}
-      <section className="ac-nav-section">
-        <div className="container ac-nav">
-          {activities.map((a, i) => (
-            <Reveal key={a.id} delay={i * 100}>
-              <a className="ac-nav-card" href={`#${a.id}`}>
-                <span className="ac-nav-num">0{i + 1}</span>
-                <h3>{a.name}</h3>
-                <p>{a.short}</p>
-                <span className="ac-nav-more">
-                  Explore
-                  <svg viewBox="0 0 20 20" aria-hidden="http://www.w3.org/2000/svg"><path d="M4 10h12M11 5l5 5-5 5" /></svg>
-                </span>
-              </a>
+      {/* Info strip */}
+      <section className="gy-info">
+        <div className="container gy-info-grid">
+          {hours.map((h, i) => (
+            <Reveal key={h.label} delay={i * 90} className="gy-info-item">
+              <span className="gy-info-label">{h.label}</span>
+              <strong>{h.time}</strong>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Activity sections */}
-      <div className="container ac-list-wrap">
-        {activities.map((a, i) => (
-          <ActivityBlock key={a.id} a={a} reversed={i % 2 === 1} />
-        ))}
-      </div>
-
-      {/* CTA */}
-      <section className="ac-cta-section" id="contact-us">
+      {/* Zones */}
+      <section className="gy-section">
         <div className="container">
-          <Reveal className="ac-cta">
-            <h2>Planning a day with us?</h2>
-            <p>Tell us what you would like to do and we will arrange the timings, tables and treatments before you arrive.</p>
-            <a
-              className="ac-btn ac-btn-light"
-              href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hello, I would like to know more about your activities.')}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Chat with our team
-            </a>
+          <Reveal className="gy-heading">
+            <h2>Train your way</h2>
+            <p>Three spaces, one floor. Move between them as your workout needs.</p>
+          </Reveal>
+
+          <div className="gy-zone-grid">
+            {zones.map((z, i) => (
+              <Reveal key={z.name} delay={i * 120} className="gy-zone">
+                <div className="gy-zone-img">
+                  <img 
+                    src={z.img} 
+                    alt={`${z.name} at The Regal Fitness Centre`} 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </div>
+                <div className="gy-zone-body">
+                  <h3>{z.name}</h3>
+                  <p>{z.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Classes */}
+      <section className="gy-section gy-classes-section" id="classes">
+        <div className="container">
+          <Reveal className="gy-heading">
+            <h2>Class schedule</h2>
+            <p>Group classes are free for hotel guests and members.</p>
+          </Reveal>
+
+          <div className="gy-tabs" role="tablist" aria-label="Days of the week">
+            {days.map((d) => (
+              <button
+                key={d}
+                type="button"
+                role="tab"
+                aria-selected={day === d}
+                className={`gy-tab ${day === d ? 'is-active' : ''}`}
+                onClick={() => setDay(d)}
+              >
+                {d}
+              </button>
+            ))}
+          </div>
+
+          <ul className="gy-class-list" key={day}>
+            {schedule[day].map((c, i) => (
+              <li key={c.time + c.name} className="gy-class" style={{ animationDelay: `${i * 80}ms` }}>
+                <span className="gy-class-time">{c.time}</span>
+                <div className="gy-class-main">
+                  <h3>{c.name}</h3>
+                  <p>with {c.coach}</p>
+                </div>
+                <span className="gy-level">{c.level}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Plans */}
+      <section className="gy-section" id="plans">
+        <div className="container">
+          <Reveal className="gy-heading">
+            <h2>Membership and passes</h2>
+            <p>Hotel guests train free. These options are for visitors and local members.</p>
+          </Reveal>
+
+          <div className="gy-plan-grid">
+            {plans.map((p, i) => (
+              <Reveal
+                key={p.name}
+                delay={i * 120}
+                className={`gy-plan ${p.featured ? 'is-featured' : ''}`}
+              >
+                {p.featured && <span className="gy-plan-flag">Most popular</span>}
+                <h3>{p.name}</h3>
+                <p className="gy-plan-note">{p.note}</p>
+                <div className="gy-plan-price">
+                  <strong>{p.price}</strong>
+                  <small>{p.per}</small>
+                </div>
+                <ul>
+                  {p.perks.map((perk) => (
+                    <li key={perk}>
+                      <svg viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M4 10.5l4 4 8-9" />
+                      </svg>
+                      {perk}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#join" className="gy-plan-btn">Choose {p.name}</a>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Coaches */}
+      <section className="gy-section gy-coach-section">
+        <div className="container">
+          <Reveal className="gy-heading">
+            <h2>Meet your coaches</h2>
+            <p>Certified, patient and happy to help beginners.</p>
+          </Reveal>
+
+          <div className="gy-coach-grid">
+            {coaches.map((c, i) => (
+              <Reveal key={c.name} delay={i * 110} className="gy-coach">
+                <span className="gy-avatar">{initials(c.name)}</span>
+                <h3>{c.name}</h3>
+                <p>{c.role}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="gy-section" id="join">
+        <div className="container gy-faq-wrap">
+          <Reveal className="gy-heading">
+            <h2>Good to know</h2>
+            <p>Quick answers before your first visit.</p>
+          </Reveal>
+
+          <Reveal className="gy-faq">
+            {faqs.map((f, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div key={f.q} className={`gy-faq-item ${isOpen ? 'is-open' : ''}`}>
+                  <button
+                    type="button"
+                    className="gy-faq-q"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpenFaq(isOpen ? -1 : i)}
+                  >
+                    {f.q}
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M5 8l5 5 5-5" />
+                    </svg>
+                  </button>
+                  <div className="gy-faq-a">
+                    <p>{f.a}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </Reveal>
+
+          <Reveal className="gy-cta">
+            <h3>Ready for your first session?</h3>
+            <p>Visit the front desk or call us on +92 300 0000000 and we will set you up.</p>
           </Reveal>
         </div>
       </section>
@@ -340,4 +358,4 @@ function Activities() {
   );
 }
 
-export default Activities;
+export default Gym;

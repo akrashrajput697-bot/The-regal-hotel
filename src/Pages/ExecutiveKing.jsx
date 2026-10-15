@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // Helmet import kiya gaya hai
 import { useCart } from '../context/CartContext';
 import '../Style/ExecutiveKing.css';
 import Footer from '../component/Footer';
@@ -103,7 +104,7 @@ function RoomCard({ room }) {
             <img
               key={src}
               src={src}
-              alt={`${room.name} - view ${i + 1}`}
+              alt={`${room.name} view ${i + 1}`}
               className={`rc-slide ${i === active ? 'is-active' : ''}`}
               loading="lazy"
             />
@@ -204,6 +205,16 @@ function RoomCard({ room }) {
 function ExecutiveKing() {
   return (
     <div className="executive-king-page">
+      {/* Meta & OG Tags for Executive King Room */}
+      <Helmet>
+        <title>Executive King Room | The Regal Hotel & Residences</title>
+        <meta name="description" content="Book the Executive King Room at The Regal. Experience luxury with a super king bed, ergonomic workspace, lounge access, and premium amenities." />
+        <meta name="keywords" content="Executive King Room, luxury king suite, business hotel room, The Regal Hotel booking" />
+        <meta name="author" content="The Regal Hotel & Residences" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/executive-king" />
+      </Helmet>
+
       {/* Hero Section (unchanged) */}
       <section className="room-inner-hero" aria-labelledby="hero-title">
         <div className="hero-overlay"></div>

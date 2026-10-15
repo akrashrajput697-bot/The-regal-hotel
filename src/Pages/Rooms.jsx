@@ -141,17 +141,6 @@ function Rooms() {
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://yourdomain.com/rooms" />
-
-        <meta property="og:title" content="Luxury Rooms & Suites | The Regal Hotel & Residences" />
-        <meta property="og:description" content="Explore exquisite 5-star rooms and luxury suites at The Regal. Book your stay for ultimate comfort and elegance." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/rooms" />
-        <meta property="og:image" content="https://www.hotelcrowncp.com/assets/images/rooms/deluxe%20double/1.webp" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Luxury Rooms & Suites | The Regal Hotel & Residences" />
-        <meta name="twitter:description" content="Explore exquisite 5-star rooms and luxury suites at The Regal." />
-        <meta name="twitter:image" content="https://www.hotelcrowncp.com/assets/images/rooms/deluxe%20double/1.webp" />
       </Helmet>
 
       <section className="about-hero">
@@ -192,13 +181,20 @@ function Rooms() {
               return (
                 <div className="room-card" key={room.id}>
                   <div className="room-image-wrapper" style={{ position: 'relative' }}>
-                    <img src={room.images[activeImgIndex]} alt={room.title} style={{ width: '100%', height: '240px', objectFit: 'cover' }} />
+                    <img 
+                      src={room.images[activeImgIndex]} 
+                      alt={`${room.title} - Luxury view at The Regal Hotel`} 
+                      style={{ width: '100%', height: '240px', objectFit: 'cover' }} 
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <span className="room-badge">{room.category.toUpperCase()}</span>
 
                     {/* Left Arrow */}
                     <button
                       onClick={(e) => handlePrevImage(room.id, room.images.length, e)}
                       className="slider-arrow left-arrow"
+                      aria-label="Previous image"
                     >
                       <ChevronLeft size={18} />
                     </button>
@@ -207,6 +203,7 @@ function Rooms() {
                     <button
                       onClick={(e) => handleNextImage(room.id, room.images.length, e)}
                       className="slider-arrow right-arrow"
+                      aria-label="Next image"
                     >
                       <ChevronRight size={18} />
                     </button>

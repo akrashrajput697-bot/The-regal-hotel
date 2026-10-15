@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // Helmet import kiya gaya hai
 import { useCart } from '../context/CartContext';
 import '../Style/PremierSuite.css';
 import Footer from '../component/Footer';
@@ -99,7 +100,7 @@ function RoomCard({ room }) {
             <img
               key={src}
               src={src}
-              alt={`${room.name} - view ${i + 1}`}
+              alt={`${room.name} view ${i + 1}`}
               className={`rc-slide ${i === active ? 'is-active' : ''}`}
               loading="lazy"
             />
@@ -199,6 +200,16 @@ function RoomCard({ room }) {
 function PremierSuite() {
   return (
     <div className="premier-suite-page">
+      {/* Meta & OG Tags for Premier Suite Room */}
+      <Helmet>
+        <title>Premier Suite Room | The Regal Hotel & Residences</title>
+        <meta name="description" content="Book the Premier Suite at The Regal. Experience ultimate luxury with private jacuzzi, 24/7 butler service, panoramic views, and master king bedroom." />
+        <meta name="keywords" content="Premier Suite, luxury suite booking, royal hotel suite, private jacuzzi hotel, The Regal Hotel" />
+        <meta name="author" content="The Regal Hotel & Residences" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/premier-suite" />
+      </Helmet>
+
       {/* Hero Section (unchanged) */}
       <section className="room-inner-hero" aria-labelledby="hero-title">
         <div className="hero-overlay"></div>

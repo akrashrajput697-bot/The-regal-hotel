@@ -54,17 +54,6 @@ function Home() {
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://yourdomain.com/" />
-
-        <meta property="og:title" content="The Regal | Luxury Suites & Modern Comfort" />
-        <meta property="og:description" content="Welcome to The Regal - A sanctuary of timeless elegance and modern luxury. Book luxury suites, fine dining, and wellness treatments." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/" />
-        <meta property="og:image" content="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Regal | Luxury Suites & Modern Comfort" />
-        <meta name="twitter:description" content="Experience a sanctuary of timeless elegance and modern luxury at The Regal." />
-        <meta name="twitter:image" content="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200" />
       </Helmet>
 
       {/* About / Welcome Section */}
@@ -128,11 +117,13 @@ function Home() {
           </div>
 
           <div className="about-images" aria-label="A look inside The Regal">
+            {/* Main top image optimized with fetchpriority="high" for best LCP score */}
             <figure className="img-box main-img">
               <img
                 src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200"
                 alt="Elegant, sunlit guest room at The Regal"
-                loading="lazy"
+                fetchpriority="high"
+                loading="eager"
                 decoding="async"
               />
               <figcaption className="image-caption">A more restful stay</figcaption>
@@ -196,7 +187,7 @@ function Home() {
           </div>
 
           <div className="rooms-grid">
-            {/* Card 1: Executive King Room -> Executive King page */}
+            {/* Card 1: Executive King Room */}
             <article className="room-card">
               <Link className="room-image-link" to="/executive-king" aria-label="Explore the Executive King Room">
                 <img
@@ -204,6 +195,7 @@ function Home() {
                   src="https://api.envoyhotel.com/uploads/1779192349166-Executive_King_Room_(3).jpg"
                   alt="Bright deluxe king room with a comfortable sitting area"
                   loading="lazy"
+                  decoding="async"
                 />
                 <span className="room-image-shade" />
                 <span className="room-badge">Guest favourite</span>
@@ -254,6 +246,7 @@ function Home() {
                   src="https://www.hotelcrowncp.com/assets/images/rooms/Executive%20grace%20twin/1.webp"
                   alt="Elegant executive suite with a separate lounge area"
                   loading="lazy"
+                  decoding="async"
                 />
                 <span className="room-image-shade" />
                 <span className="room-badge">More room to unwind</span>
@@ -304,6 +297,7 @@ function Home() {
                   src="https://api.envoyhotel.com/uploads/1779192683149-Premier_Suite_Room_(2).jpg"
                   alt="Refined penthouse bedroom with warm natural light"
                   loading="lazy"
+                  decoding="async"
                 />
                 <span className="room-image-shade" />
                 <span className="room-badge">The signature stay</span>
@@ -371,6 +365,7 @@ function Home() {
                   src="https://images.pexels.com/photos/32981891/pexels-photo-32981891.jpeg" 
                   alt="Fine Dining Restaurant" 
                   loading="lazy" 
+                  decoding="async"
                 />
               </div>
               <div className="zigzag-content">
@@ -388,6 +383,7 @@ function Home() {
                   src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=870&auto=format&fit=crop" 
                   alt="Fitness & Gym" 
                   loading="lazy" 
+                  decoding="async"
                 />
               </div>
               <div className="zigzag-content">
@@ -405,6 +401,7 @@ function Home() {
                   src="https://plus.unsplash.com/premium_photo-1723489360240-e1896c1af32a?q=80&w=870&auto=format&fit=crop" 
                   alt="Spa & Wellness" 
                   loading="lazy" 
+                  decoding="async"
                 />
               </div>
               <div className="zigzag-content">
@@ -422,6 +419,7 @@ function Home() {
                   src="https://images.unsplash.com/photo-1774284498049-eee34f796ce7?q=80&w=871&auto=format&fit=crop" 
                   alt="Infinity Pool" 
                   loading="lazy" 
+                  decoding="async"
                 />
               </div>
               <div className="zigzag-content">
@@ -439,6 +437,7 @@ function Home() {
                   src="https://images.unsplash.com/photo-1642376826232-3d2f86692bb5?w=500&auto=format&fit=crop" 
                   alt="Snooker & Indoor Entertainment" 
                   loading="lazy" 
+                  decoding="async"
                 />
               </div>
               <div className="zigzag-content">

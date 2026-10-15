@@ -69,17 +69,6 @@ function Gallery() {
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://yourdomain.com/gallery" />
-
-        <meta property="og:title" content="Photo Gallery & Rooms | The Regal Hotel & Residences" />
-        <meta property="og:description" content="Take a virtual tour of our luxury rooms, fine dining restaurants, and resort facilities at The Regal Hotel & Residences." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/gallery" />
-        <meta property="og:image" content="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=1000" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Photo Gallery & Rooms | The Regal Hotel & Residences" />
-        <meta name="twitter:description" content="Explore the photo gallery of The Regal Hotel & Residences in Islamabad." />
-        <meta name="twitter:image" content="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=1000" />
       </Helmet>
 
       {/* Hero */}
@@ -122,7 +111,12 @@ function Gallery() {
                 onClick={() => setOpen(i)}
                 aria-label={`Open ${p.title}`}
               >
-                <img src={p.src} alt={p.title} loading="lazy" />
+                <img 
+                  src={p.src} 
+                  alt={`${p.title} - The Regal Hotel gallery`} 
+                  loading="lazy" 
+                  decoding="async"
+                />
                 <span className="gl-overlay">
                   <span className="gl-cat">{p.cat}</span>
                   <span className="gl-title">{p.title}</span>
@@ -166,7 +160,13 @@ function Gallery() {
           )}
 
           <figure className="gl-lb-figure" onClick={(e) => e.stopPropagation()}>
-            <img key={current.id} src={px(current.src.match(/photos\/(\d+)/)[1], 1600)} alt={current.title} />
+            <img 
+              key={current.id} 
+              src={px(current.src.match(/photos\/(\d+)/)[1], 1600)} 
+              alt={`${current.title} magnified view`} 
+              loading="eager"
+              decoding="async"
+            />
             <figcaption>
               <strong>{current.title}</strong>
               <span>

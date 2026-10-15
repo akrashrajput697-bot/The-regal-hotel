@@ -7,12 +7,10 @@ function About() {
   return (
     <>
       <Helmet>
-
         <title>About Us | The Regal - Luxury Hotel & Residences</title>
         <meta name="description" content="Discover the story, vision, and core values of The Regal. Delivering a legacy of timeless elegance, 5-star luxury, and unmatched premium hospitality for over 15 years." />
         <meta name="keywords" content="About The Regal, luxury hotel legacy, hotel history, 5-star luxury hotel, premium hospitality, royal suites, hotel vision and mission" />
         <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/about" />
-      
       </Helmet>
       
       <div className="about-page">
@@ -64,14 +62,18 @@ function About() {
                 <figure className="rg-story-photo">
                   <img
                     src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
-                    alt="Grand Lobby"
+                    alt="Grand Lobby at The Regal Hotel & Residences"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <figcaption>Grand Lobby</figcaption>
                 </figure>
                 <figure className="rg-story-photo">
                   <img
                     src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"
-                    alt="Royal Suite"
+                    alt="Royal Suite at The Regal Hotel & Residences"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <figcaption>Royal Suite</figcaption>
                 </figure>

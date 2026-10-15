@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import UserPageShell from '../component/UserPageShell';
 import {
   useUserData,
@@ -162,7 +163,23 @@ export default function Notifications() {
       title="Notifications"
       subtitle="Booking confirmations, points and rewards, all in one place."
     >
-      {(user) => <NotificationsContent user={user} />}
+      {(user) => (
+        <>
+          <Helmet>
+            <title>Notifications | The Regal Hotel & Residences</title>
+            <meta name="description" content="View your booking confirmations, points, and rewards notifications at The Regal Hotel & Residences." />
+            <meta name="robots" content="noindex, nofollow" />
+            <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/notifications" />
+
+            {/* Open Graph Tags */}
+            <meta property="og:title" content="Notifications | The Regal Hotel & Residences" />
+            <meta property="og:description" content="View your personal booking confirmations and reward updates." />
+            <meta property="og:type" content="website" />
+          </Helmet>
+
+          <NotificationsContent user={user} />
+        </>
+      )}
     </UserPageShell>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // Helmet import kiya gaya hai
 import UserPageShell from '../component/UserPageShell';
 import {
   useUserData,
@@ -183,7 +184,23 @@ export default function LoyaltyPoints() {
       title="Loyalty Points"
       subtitle={`Earn ${POINTS_PER_STAY} points for every stay. Complete ${STAYS_FOR_REWARD} stays and get ${REWARD_DISCOUNT}% off.`}
     >
-      {(user) => <LoyaltyContent user={user} />}
+      {(user) => (
+        <>
+          <Helmet>
+            <title>Loyalty Points | The Regal Hotel & Residences</title>
+            <meta name="description" content="View your earned loyalty points and reward discounts at The Regal Hotel & Residences." />
+            <meta name="robots" content="noindex, nofollow" />
+            <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/loyalty-points" />
+
+            {/* Open Graph Tags */}
+            <meta property="og:title" content="Loyalty Points | The Regal Hotel & Residences" />
+            <meta property="og:description" content="Track your stays, loyalty points, and exclusive reward discounts." />
+            <meta property="og:type" content="website" />
+          </Helmet>
+
+          <LoyaltyContent user={user} />
+        </>
+      )}
     </UserPageShell>
   );
 }

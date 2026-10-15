@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // Helmet import kiya gaya hai
 import { useCart } from '../context/CartContext';
 import '../Style/ExecutiveTwin.css';
 import Footer from '../component/Footer';
@@ -99,7 +100,7 @@ function RoomCard({ room }) {
             <img
               key={src}
               src={src}
-              alt={`${room.name} - view ${i + 1}`}
+              alt={`${room.name} view ${i + 1}`}
               className={`rc-slide ${i === active ? 'is-active' : ''}`}
               loading="lazy"
             />
@@ -199,6 +200,16 @@ function RoomCard({ room }) {
 function ExecutiveTwin() {
   return (
     <div className="executive-twin-page">
+      {/* Meta & OG Tags for Executive Twin Room */}
+      <Helmet>
+        <title>Executive Twin Room | The Regal Hotel & Residences</title>
+        <meta name="description" content="Book the Executive Twin Room at The Regal. Spacious suite with dual executive twin beds, dual work desks, lounge access, and high floor views." />
+        <meta name="keywords" content="Executive Twin Room, luxury twin suite, business hotel suite, The Regal Hotel booking" />
+        <meta name="author" content="The Regal Hotel & Residences" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/executive-twin" />
+      </Helmet>
+
       {/* Hero Section (unchanged) */}
       <section className="room-inner-hero" aria-labelledby="hero-title">
         <div className="hero-overlay"></div>

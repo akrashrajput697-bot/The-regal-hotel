@@ -117,7 +117,6 @@ function Contact() {
     if (form.message.trim().length < 10) er.message = 'Please write at least a short sentence.';
     setErrors(er);
     if (Object.keys(er).length === 0) {
-      // TODO: yahan apni API / EmailJS / backend integration lagao
       setSent(true);
     }
   };
@@ -136,17 +135,6 @@ function Contact() {
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://yourdomain.com/contact" />
-
-        <meta property="og:title" content="Contact Us & Reservations | The Regal Hotel & Residences" />
-        <meta property="og:description" content="Connect with our front desk, reservations team, or send us a message for any queries regarding your stay in Islamabad." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/contact" />
-        <meta property="og:image" content="https://images.pexels.com/photos/15473886/pexels-photo-15473886.jpeg?auto=compress&cs=tinysrgb&w=1000" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Contact Us & Reservations | The Regal Hotel & Residences" />
-        <meta name="twitter:description" content="Reach out to The Regal Hotel & Residences in Islamabad through phone, email, WhatsApp, or our contact form." />
-        <meta name="twitter:image" content="https://images.pexels.com/photos/15473886/pexels-photo-15473886.jpeg?auto=compress&cs=tinysrgb&w=1000" />
       </Helmet>
 
       {/* Hero */}
@@ -281,7 +269,7 @@ function Contact() {
           <Reveal>
             <div className="ct-map">
               <iframe
-                title="The Regal Hotel location"
+                title="The Regal Hotel location map in Islamabad"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(CONTACT.mapQuery)}&output=embed`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import {
   updateProfile,
   updatePassword,
@@ -243,7 +244,23 @@ function AccountContent({ user }) {
 export default function Account() {
   return (
     <UserPageShell title="Manage Your Account" subtitle="Update your details and keep your account secure.">
-      {(user) => <AccountContent user={user} />}
+      {(user) => (
+        <>
+          <Helmet>
+            <title>Account Settings | The Regal Hotel & Residences</title>
+            <meta name="description" content="Manage your account profile, personal details, and security settings at The Regal Hotel & Residences." />
+            <meta name="robots" content="noindex, nofollow" />
+            <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/account" />
+
+            {/* Open Graph Tags */}
+            <meta property="og:title" content="Account Settings | The Regal Hotel & Residences" />
+            <meta property="og:description" content="Manage your account profile and security settings." />
+            <meta property="og:type" content="website" />
+          </Helmet>
+
+          <AccountContent user={user} />
+        </>
+      )}
     </UserPageShell>
   );
 }

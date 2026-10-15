@@ -156,7 +156,6 @@ function Restaurant() {
     if (!form.date) er.date = 'Choose a date.';
     setErrors(er);
     if (Object.keys(er).length === 0) {
-      // TODO: yahan apni API / WhatsApp / email integration lagao
       setSent(true);
     }
   };
@@ -175,17 +174,6 @@ function Restaurant() {
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://yourdomain.com/restaurant" />
-
-        <meta property="og:title" content="Fine Dining & Restaurant | The Regal Hotel & Residences" />
-        <meta property="og:description" content="Experience exceptional fine dining at The Regal Restaurant. Explore our menu, signature dishes, and book your table today." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/restaurant" />
-        <meta property="og:image" content="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1000" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Fine Dining & Restaurant | The Regal Hotel & Residences" />
-        <meta name="twitter:description" content="Experience exceptional fine dining at The Regal Restaurant in Islamabad." />
-        <meta name="twitter:image" content="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1000" />
       </Helmet>
 
       {/* Hero */}
@@ -226,7 +214,7 @@ function Restaurant() {
             {signatures.map((d, i) => (
               <Reveal key={d.name} delay={i * 120} className="rs-sig-card">
                 <div className="rs-sig-img">
-                  <img src={d.img} alt={d.name} loading="lazy" />
+                  <img src={d.img} alt={`${d.name} - Signature dish at The Regal Restaurant`} loading="lazy" decoding="async" />
                   <span className="rs-sig-price">{d.price}</span>
                 </div>
                 <div className="rs-sig-body">
@@ -262,7 +250,6 @@ function Restaurant() {
             ))}
           </div>
 
-          {/* key = category => list dobara animate hoti hai */}
           <ul className="rs-menu-list" key={category}>
             {menu[category].map((item, i) => (
               <li
@@ -298,7 +285,7 @@ function Restaurant() {
                 className={`rs-space ${i % 2 === 1 ? 'rs-space-rev' : ''}`}
               >
                 <div className="rs-space-img">
-                  <img src={s.img} alt={s.name} loading="lazy" />
+                  <img src={s.img} alt={`${s.name} ambiance at The Regal Restaurant`} loading="lazy" decoding="async" />
                 </div>
                 <div className="rs-space-text">
                   <h3>{s.name}</h3>

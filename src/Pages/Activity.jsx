@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import UserPageShell from '../component/UserPageShell';
 import {
   useUserData,
@@ -148,7 +149,18 @@ function ActivityContent({ user }) {
 export default function Activity() {
   return (
     <UserPageShell title="Activity" subtitle="Your ongoing, upcoming and past bookings.">
-      {(user) => <ActivityContent user={user} />}
+      {(user) => (
+        <>
+          <Helmet>
+            <title>My Activity & Bookings | The Regal Hotel & Residences</title>
+            <meta name="description" content="View your ongoing, upcoming, and past hotel room bookings at The Regal Hotel & Residences." />
+            <meta name="robots" content="noindex, nofollow" />
+            <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/activity" />
+          </Helmet>
+
+          <ActivityContent user={user} />
+        </>
+      )}
     </UserPageShell>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // Helmet import kiya gaya hai
 import { useCart } from '../context/CartContext';
 import '../Style/DeluxeFamily.css';
 import Footer from '../component/Footer';
@@ -102,7 +103,7 @@ function RoomCard({ room }) {
             <img
               key={src}
               src={src}
-              alt={`${room.name} - view ${i + 1}`}
+              alt={`${room.name} view ${i + 1}`}
               className={`rc-slide ${i === active ? 'is-active' : ''}`}
               loading="lazy"
             />
@@ -203,6 +204,16 @@ function RoomCard({ room }) {
 function DeluxeFamily() {
   return (
     <div className="deluxe-family-page">
+      {/* Meta Tags added for Deluxe Family Room */}
+      <Helmet>
+        <title>Deluxe Family Room | The Regal Hotel & Residences</title>
+        <meta name="description" content="Book the Deluxe Family Room at The Regal. Enjoy spacious living, dual smart TVs, kids safe setup, and luxury amenities for family stays." />
+        <meta name="keywords" content="Deluxe Family Room, family hotel suite, The Regal Hotel, luxury family rooms booking" />
+        <meta name="author" content="The Regal Hotel & Residences" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/deluxe-family" />
+      </Helmet>
+
       {/* Hero Section (unchanged) */}
       <section className="room-inner-hero" aria-labelledby="hero-title">
         <div className="hero-overlay"></div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // Helmet import kiya gaya hai
 import { useCart } from '../context/CartContext';
 import '../Style/Availability.css';
 
@@ -88,6 +89,16 @@ function Availability() {
 
     return (
         <div className="av-page">
+            {/* Meta Tags added via Helmet */}
+            <Helmet>
+                <title>Check Room Availability | The Regal Hotel & Residences</title>
+                <meta name="description" content="Check live room availability, pricing, and book your preferred luxury suites at The Regal Hotel & Residences." />
+                <meta name="keywords" content="The Regal, room availability, hotel booking, luxury suites, book hotel online" />
+                <meta name="author" content="The Regal Hotel & Residences" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/availability" />
+            </Helmet>
+
             {/* Hero */}
             <section className="av-hero">
                 <div className="av-hero-bg" style={{ backgroundImage: `url(${img(271624, 1600)})` }} />
@@ -150,7 +161,13 @@ function Availability() {
                                     style={{ cursor: 'pointer' }}
                                 >
                                     <div className="av-media">
-                                        <img src={r.image} alt={r.name} loading="lazy" onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }} />
+                                        <img 
+                                            src={r.image} 
+                                            alt={`${r.name} - The Regal Hotel`} 
+                                            loading="lazy" 
+                                            decoding="async" 
+                                            onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }} 
+                                        />
                                         <span className={`av-badge ${r.available ? (r.left <= 2 ? 'warn' : 'ok') : 'out'}`}>
                                             {r.available ? (r.left <= 2 ? `Only ${r.left} left` : 'Available') : 'Not available'}
                                         </span>

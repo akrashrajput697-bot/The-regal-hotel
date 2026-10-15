@@ -160,17 +160,6 @@ function Gym() {
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://yourdomain.com/gym" />
-
-        <meta property="og:title" content="Fitness Centre & Gym | The Regal Hotel & Residences" />
-        <meta property="og:description" content="Discover our modern fitness centre, gym equipment, class schedules, and membership passes in Islamabad." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/gym" />
-        <meta property="og:image" content="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1000" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Fitness Centre & Gym | The Regal Hotel & Residences" />
-        <meta name="twitter:description" content="Train at The Regal Fitness Centre with modern equipment, yoga studios, and professional coaches." />
-        <meta name="twitter:image" content="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1000" />
       </Helmet>
 
       {/* Hero */}
@@ -211,7 +200,12 @@ function Gym() {
             {zones.map((z, i) => (
               <Reveal key={z.name} delay={i * 120} className="gy-zone">
                 <div className="gy-zone-img">
-                  <img src={z.img} alt={z.name} loading="lazy" />
+                  <img 
+                    src={z.img} 
+                    alt={`${z.name} at The Regal Fitness Centre`} 
+                    loading="lazy" 
+                    decoding="async"
+                  />
                 </div>
                 <div className="gy-zone-body">
                   <h3>{z.name}</h3>
