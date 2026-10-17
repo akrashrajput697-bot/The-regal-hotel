@@ -9,12 +9,16 @@ const img = (id, w = 900) => `https://images.pexels.com/photos/${id}/pexels-phot
 
 /* ---------- Rooms data ---------- */
 const ROOMS = [
-    { id: 'deluxe-double', name: 'Deluxe Double Room', type: 'Deluxe', price: 45000, left: 4, max: 2, size: '32 m²', bed: '1 double bed', image: 'https://www.hotelcrowncp.com/assets/images/rooms/deluxe%20double/1.webp', path: '/deluxe-double', perks: ['Free Wi-Fi', 'Air conditioning', 'City view'] },
-    { id: 'deluxe-twin', name: 'Deluxe Twin Room', type: 'Deluxe', price: 55000, left: 3, max: 2, size: '32 m²', bed: '2 single beds',  image: 'https://www.hotelcrowncp.com/assets/images/rooms/deluxe%20twin/1.webp', path: '/deluxe-twin', perks: ['Free Wi-Fi', 'Air conditioning', 'Work desk'] },
-    { id: 'deluxe-family', name: 'Deluxe Family Room', type: 'Deluxe', price: 65000, left: 2, max: 4, size: '48 m²', bed: '1 double + 2 single', image: 'https://api.envoyhotel.com/uploads/1779192228389-Deluxe_Family_Room_(5).jpg', path: '/deluxe-family', perks: ['Free Wi-Fi', 'Sitting area', 'Breakfast'] },
-    { id: 'executive-king', name: 'Executive King Room', type: 'Executive', price: 75000, left: 2, max: 3, size: '42 m²', bed: '1 king bed',  image: 'https://api.envoyhotel.com/uploads/1779192349166-Executive_King_Room_(3).jpg',  path: '/executive-king', perks: ['Lounge access', 'Marble bath', 'Breakfast'] },
-    { id: 'executive-twin', name: 'Executive Twin Room', type: 'Executive', price: 85000, left: 1, max: 2, size: '40 m²', bed: '2 single beds', image: 'https://www.hotelcrowncp.com/assets/images/rooms/Executive%20grace%20twin/1.webp', path: '/executive-twin', perks: ['Lounge access', 'City view', 'Breakfast'] },
-    { id: 'premier-suite', name: 'Premier Suite', type: 'Suite', price: 95000, left: 1, max: 4, size: '80 m²', bed: '1 king bed + lounge', image: 'https://api.envoyhotel.com/uploads/1779192683149-Premier_Suite_Room_(2).jpg',  path: '/premier-suite', perks: ['Private lounge', 'Butler service', 'Panoramic view'] },
+    { id: 'deluxe-double', name: 'Deluxe Double Room', type: 'Deluxe', price: 45000, left: 4, max: 2, size: '32 m²', bed: '1 double bed',image: import.meta.env.BASE_URL + 'deluxe-double.webp', path: '/deluxe-double', perks: ['Free Wi-Fi', 'Air conditioning', 'City view'] },
+
+    { id: 'deluxe-twin', name: 'Deluxe Twin Room', type: 'Deluxe', price: 55000, left: 3, max: 2, size: '32 m²', bed: '2 single beds', image: import.meta.env.BASE_URL + 'availability-twin.webp', path: '/deluxe-twin', perks: ['Free Wi-Fi', 'Air conditioning', 'Work desk'] },
+
+    { id: 'deluxe-family', name: 'Deluxe Family Room', type: 'Deluxe', price: 65000, left: 2, max: 4, size: '48 m²', bed: '1 double + 2 single',image: import.meta.env.BASE_URL + 'deluxe-family.Webp', path: '/deluxe-family', perks: ['Free Wi-Fi', 'Sitting area', 'Breakfast'] },
+
+    { id: 'executive-king', name: 'Executive King Room', type: 'Executive', price: 75000, left: 2, max: 3, size: '42 m²', bed: '1 king bed', image: import.meta.env.BASE_URL + 'executive-king.jpg',  path: '/executive-king', perks: ['Lounge access', 'Marble bath', 'Breakfast'] },
+
+    { id: 'executive-twin', name: 'Executive Twin Room', type: 'Executive', price: 85000, left: 1, max: 2, size: '40 m²', bed: '2 single beds', image: import.meta.env.BASE_URL + 'executive-twin.webp',path: '/executive-twin', perks: ['Lounge access', 'City view', 'Breakfast'] },
+    { id: 'premier-suite', name: 'Premier Suite', type: 'Suite', price: 95000, left: 1, max: 4, size: '80 m²', bed: '1 king bed + lounge', image: import.meta.env.BASE_URL + 'premier-suite.webp',  path: '/premier-suite', perks: ['Private lounge', 'Butler service', 'Panoramic view'] },
 ];
 
 const FILTERS = ['All', 'Deluxe', 'Executive', 'Suite'];
