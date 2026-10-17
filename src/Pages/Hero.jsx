@@ -7,10 +7,10 @@ import 'react-date-range/dist/theme/default.css';
 import '../Style/Hero.css';
 
 const sliderImages = [
-  'https://images.pexels.com/photos/18353061/pexels-photo-18353061.jpeg',
-  'https://images.pexels.com/photos/19564704/pexels-photo-19564704.jpeg',
-  'https://images.pexels.com/photos/32981891/pexels-photo-32981891.jpeg',
-  'https://images.pexels.com/photos/17926435/pexels-photo-17926435.jpeg'
+  'https://images.pexels.com/photos/18353061/pexels-photo-18353061.jpeg?auto=compress&cs=tinysrgb&w=800',
+  'https://images.pexels.com/photos/19564704/pexels-photo-19564704.jpeg?auto=compress&cs=tinysrgb&w=800',
+  'https://images.pexels.com/photos/32981891/pexels-photo-32981891.jpeg?auto=compress&cs=tinysrgb&w=800',
+  'https://images.pexels.com/photos/17926435/pexels-photo-17926435.jpeg?auto=compress&cs=tinysrgb&w=800',
 ];
 
 function Hero() {
@@ -97,15 +97,15 @@ function Hero() {
 
   return (
     <section className="regal-hero-section">
+      {/* 🚀 Optimized LCP Image with High Priority & Eager Loading */}
       <img
         src={sliderImages[currentIndex]}
-        alt="Hero Background"
+        alt="The Regal Hotel luxury suite interior view"
         className="hero-background-image"
+        fetchpriority="high"
+        loading="eager"
       />  
       
-    
-    
-
       <div className="hero-overlay"></div>
 
       <div className="hero-content-wrapper">
@@ -218,7 +218,5 @@ function Hero() {
     </section>
   );
 }
-
-
 
 export default Hero;

@@ -18,17 +18,17 @@ const zones = [
   {
     name: 'Cardio Floor',
     text: 'Treadmills, bikes, ellipticals and rowers, each with its own screen and charging port.',
-    img: px(1954524),
+    img: 'https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     name: 'Free Weights',
     text: 'Dumbbells up to 50 kg, adjustable benches, squat racks and a full barbell area.',
-    img: px(841130),
+    img: 'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     name: 'Studio',
     text: 'A bright, mirrored room for yoga, stretching and small group classes.',
-    img: px(1552242),
+    img: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
 ];
 
@@ -159,7 +159,7 @@ function Gym() {
         <meta name="keywords" content="hotel gym islamabad, fitness centre, gym membership, yoga classes, personal training, the regal residences" />
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/gym" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/gym" />
       </Helmet>
 
       {/* Hero */}
@@ -203,7 +203,8 @@ function Gym() {
                   <img 
                     src={z.img} 
                     alt={`${z.name} at The Regal Fitness Centre`} 
-                    loading="lazy" 
+                    fetchpriority={i === 0 ? "high" : "auto"}
+                    loading={i === 0 ? "eager" : "lazy"} 
                     decoding="async"
                   />
                 </div>

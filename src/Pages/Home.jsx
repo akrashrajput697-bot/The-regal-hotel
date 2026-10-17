@@ -192,7 +192,7 @@ function Home() {
               <Link className="room-image-link" to="/executive-king" aria-label="Explore the Executive King Room">
                 <img
                   className="room-image"
-                  src="https://api.envoyhotel.com/uploads/1779192349166-Executive_King_Room_(3).jpg"
+                  src="https://api.envoyhotel.com/uploads/1779192349166-Executive_King_Room_(3).jpg?auto=compress&cs=tinysrgb&w=800"
                   alt="Bright deluxe king room with a comfortable sitting area"
                   loading="lazy"
                   decoding="async"
@@ -243,7 +243,7 @@ function Home() {
               <Link className="room-image-link" to="/executive-twin" aria-label="Explore the Executive Twin Room">
                 <img
                   className="room-image"
-                  src="https://www.hotelcrowncp.com/assets/images/rooms/Executive%20grace%20twin/1.webp"
+                  src="https://www.hotelcrowncp.com/assets/images/rooms/Executive%20grace%20twin/1.webp?auto=compress&cs=tinysrgb&w=800"
                   alt="Elegant executive suite with a separate lounge area"
                   loading="lazy"
                   decoding="async"
@@ -362,7 +362,7 @@ function Home() {
             <div className="zigzag-row">
               <div className="zigzag-image">
                 <img 
-                  src="https://images.pexels.com/photos/32981891/pexels-photo-32981891.jpeg" 
+                  src="https://images.pexels.com/photos/32981891/pexels-photo-32981891.jpeg?auto=compress&cs=tinysrgb&w=870&fit=crop" 
                   alt="Fine Dining Restaurant" 
                   loading="lazy" 
                   decoding="async"
@@ -380,7 +380,7 @@ function Home() {
             <div className="zigzag-row reverse">
               <div className="zigzag-image">
                 <img 
-                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=870&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=compress&cs=tinysrgb&w=870&fit=crop" 
                   alt="Fitness & Gym" 
                   loading="lazy" 
                   decoding="async"

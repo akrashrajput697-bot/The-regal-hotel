@@ -68,7 +68,7 @@ function Gallery() {
         <meta name="keywords" content="hotel gallery, photos, luxury rooms, restaurant, swimming pool, islamabad hotel, the regal residences" />
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/gallery" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/gallery" />
       </Helmet>
 
       {/* Hero */}
@@ -114,7 +114,8 @@ function Gallery() {
                 <img 
                   src={p.src} 
                   alt={`${p.title} - The Regal Hotel gallery`} 
-                  loading="lazy" 
+                  fetchpriority={i === 0 ? "high" : "auto"}
+                  loading={i === 0 ? "eager" : "lazy"} 
                   decoding="async"
                 />
                 <span className="gl-overlay">

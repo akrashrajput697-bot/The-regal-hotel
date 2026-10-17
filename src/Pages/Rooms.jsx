@@ -140,7 +140,7 @@ function Rooms() {
         <meta name="keywords" content="luxury rooms, hotel suites, deluxe double room, executive king room, premier suite, hotel booking, 5-star accommodation" />
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/rooms" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/rooms" />
       </Helmet>
 
       <section className="about-hero">
@@ -176,8 +176,11 @@ function Rooms() {
           </div>
 
           <div className="rooms-grid">
-            {filteredRooms.map((room) => {
+            {filteredRooms.map((room, index) => {
               const activeImgIndex = currentImageIndices[room.id] || 0;
+              // Agar pehla room card hai, toh uski image ko eager load aur high priority do for best LCP performance
+              const isFirstCard = index === 0 && activeTab === 'All';
+
               return (
                 <div className="room-card" key={room.id}>
                   <div className="room-image-wrapper" style={{ position: 'relative' }}>
@@ -185,7 +188,8 @@ function Rooms() {
                       src={room.images[activeImgIndex]} 
                       alt={`${room.title} - Luxury view at The Regal Hotel`} 
                       style={{ width: '100%', height: '240px', objectFit: 'cover' }} 
-                      loading="lazy"
+                      fetchpriority={isFirstCard ? "high" : "auto"}
+                      loading={isFirstCard ? "eager" : "lazy"}
                       decoding="async"
                     />
                     <span className="room-badge">{room.category.toUpperCase()}</span>

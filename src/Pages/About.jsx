@@ -59,15 +59,18 @@ function About() {
               </div>
 
               <div className="rg-story-gallery">
+                {/* 🚀 Optimized main image for fast loading & LCP score */}
                 <figure className="rg-story-photo">
                   <img
                     src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
                     alt="Grand Lobby at The Regal Hotel & Residences"
-                    loading="lazy"
+                    fetchpriority="high"
+                    loading="eager"
                     decoding="async"
                   />
                   <figcaption>Grand Lobby</figcaption>
                 </figure>
+                
                 <figure className="rg-story-photo">
                   <img
                     src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"

@@ -23,6 +23,7 @@ import DeluxeFamily from './Pages/DeluxeFamily';
 import ExecutiveKing from './Pages/ExecutiveKing';
 import ExecutiveTwin from './Pages/ExecutiveTwin';
 import PremierSuite from './Pages/PremierSuite';
+import NotFound from './Pages/NotFound';
 
 // Auth pages
 import Login from './Pages/Login';
@@ -51,7 +52,6 @@ function ScrollToTop() {
       }, 150);
       return () => clearTimeout(timer);
     } else {
-      // Force instant scroll to top on page load
       window.scrollTo(0, 0);
     }
   }, [pathname, hash]);
@@ -61,11 +61,27 @@ function ScrollToTop() {
 
 function LayoutWrapper() {
   const { pathname } = useLocation();
-  const hideFooter = NO_FOOTER_PATHS.includes(pathname);
+  
+  // List of all valid paths in the project
+  const validPaths = [
+    '/', '/home', '/about', '/rooms', '/availability', '/reservation', 
+    '/restaurant', '/gallery', '/gym', '/activities', '/contact', 
+    '/deluxe-double', '/deluxe-twin', '/deluxe-family', '/executive-king', 
+    '/executive-twin', '/premier-suite', '/login', '/signup', 
+    '/notifications', '/loyalty-points', '/account', '/activity'
+  ];
+
+  const isNotFoundPage = !validPaths.includes(pathname);
+  const hideFooter = NO_FOOTER_PATHS.includes(pathname) || isNotFoundPage;
 
   return (
     <>
-      <Navbar />
+      {/* Preloader sirf tab aayega jab real page ho, 404 par nahi aayega */}
+      {!isNotFoundPage && <Preloader />}
+
+      {/* Hide Navbar, Footer and FloatingActions on 404 pages */}
+      {!isNotFoundPage && <Navbar />}
+      
       <Routes>
         <Route path="/" element={<><Hero /><Home /></>} />
         <Route path="/home" element={<><Hero /><Home /></>} />
@@ -94,9 +110,13 @@ function LayoutWrapper() {
         <Route path="/loyalty-points" element={<LoyaltyPoints />} />
         <Route path="/account" element={<Account />} />
         <Route path="/activity" element={<Activity />} />
+
+        {/* Catch-all 404 Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
+
       {!hideFooter && <Footer />}
-      <FloatingActions />
+      {!isNotFoundPage && <FloatingActions />}
     </>
   );
 }
@@ -107,7 +127,6 @@ function App() {
       <CartProvider>
         <Router basename="/The-regal-hotel">
           <ScrollToTop />
-          <Preloader />
           <Helmet>
             {/* Standard SEO Meta Tags */}
             <title>The Regal Hotel & Residences | Luxury Rooms & Suites</title>
@@ -115,18 +134,18 @@ function App() {
             <meta name="keywords" content="The Regal Hotel, Luxury Hotel, Hotel Reservation, Suites, Islamabad Hotel, Room Booking" />
             <meta name="author" content="The Regal Hotel & Residences" />
 
-            {/* Open Graph Meta Tags (For WhatsApp, Facebook, LinkedIn previews) */}
+            {/* Open Graph Meta Tags */}
             <meta property="og:type" content="website" />
             <meta property="og:url" content="https://akrashrajput697-bot.github.io/The-regal-hotel/" />
             <meta property="og:title" content="The Regal Hotel & Residences | Luxury Rooms & Suites" />
             <meta property="og:description" content="Experience ultimate luxury and comfort at The Regal Hotel & Residences. Book your stay today." />
-            <meta property="og:image" content="https://akrashrajput697-bot.github.io/The-regal-hotel/og-image.jpg" />
+            <meta property="og:image" content="https://akrashrajput697-bot.github.io/The-regal-hotel/favicon.png" />
 
             {/* Twitter Card Meta Tags */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="The Regal Hotel & Residences" />
             <meta name="twitter:description" content="Experience ultimate luxury and comfort at The Regal Hotel & Residences." />
-            <meta name="twitter:image" content="https://akrashrajput697-bot.github.io/The-regal-hotel/og-image.jpg" />
+            <meta name="twitter:image" content="https://akrashrajput697-bot.github.io/The-regal-hotel/favicon.png" />
           </Helmet>
           <LayoutWrapper />
         </Router>

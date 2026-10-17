@@ -134,7 +134,7 @@ function Contact() {
         <meta name="keywords" content="contact the regal, hotel reservations islamabad, hotel phone number, email, address, location map" />
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/contact" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/contact" />
       </Helmet>
 
       {/* Hero */}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap Direction
+Sitemap: https://akrashrajput697-bot.github.io/The-regal-hotel/sitemap.xml

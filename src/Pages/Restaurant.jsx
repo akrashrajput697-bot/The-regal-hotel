@@ -173,7 +173,7 @@ function Restaurant() {
         <meta name="keywords" content="restaurant, fine dining, the regal restaurant, pakistani food, steaks, breakfast, dinner reservation, islamabad hotel restaurant" />
         <meta name="author" content="The Regal Hotel & Residences" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/restaurant" />
+        <link rel="canonical" href="https://akrashrajput697-bot.github.io/The-regal-hotel/restaurant" />
       </Helmet>
 
       {/* Hero */}
@@ -214,7 +214,13 @@ function Restaurant() {
             {signatures.map((d, i) => (
               <Reveal key={d.name} delay={i * 120} className="rs-sig-card">
                 <div className="rs-sig-img">
-                  <img src={d.img} alt={`${d.name} - Signature dish at The Regal Restaurant`} loading="lazy" decoding="async" />
+                  <img 
+                    src={d.img} 
+                    alt={`${d.name} - Signature dish at The Regal Restaurant`} 
+                    fetchpriority={i === 0 ? "high" : "auto"}
+                    loading={i === 0 ? "eager" : "lazy"} 
+                    decoding="async" 
+                  />
                   <span className="rs-sig-price">{d.price}</span>
                 </div>
                 <div className="rs-sig-body">
