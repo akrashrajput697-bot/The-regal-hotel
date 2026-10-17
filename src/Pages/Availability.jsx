@@ -18,6 +18,7 @@ const ROOMS = [
     { id: 'executive-king', name: 'Executive King Room', type: 'Executive', price: 75000, left: 2, max: 3, size: '42 m²', bed: '1 king bed', image: import.meta.env.BASE_URL + 'executive-king.jpg',  path: '/executive-king', perks: ['Lounge access', 'Marble bath', 'Breakfast'] },
 
     { id: 'executive-twin', name: 'Executive Twin Room', type: 'Executive', price: 85000, left: 1, max: 2, size: '40 m²', bed: '2 single beds', image: import.meta.env.BASE_URL + 'executive-twin.webp',path: '/executive-twin', perks: ['Lounge access', 'City view', 'Breakfast'] },
+    
     { id: 'premier-suite', name: 'Premier Suite', type: 'Suite', price: 95000, left: 1, max: 4, size: '80 m²', bed: '1 king bed + lounge', image: import.meta.env.BASE_URL + 'premier-suite.webp',  path: '/premier-suite', perks: ['Private lounge', 'Butler service', 'Panoramic view'] },
 ];
 

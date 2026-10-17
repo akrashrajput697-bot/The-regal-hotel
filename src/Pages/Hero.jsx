@@ -7,11 +7,10 @@ import 'react-date-range/dist/theme/default.css';
 import '../Style/Hero.css';
 
 const sliderImages = [
-  'https://images.pexels.com/photos/18353061/pexels-photo-18353061.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/19564704/pexels-photo-19564704.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/32981891/pexels-photo-32981891.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/17926435/pexels-photo-17926435.jpeg?auto=compress&cs=tinysrgb&w=800',
-];
+ import.meta.env.BASE_URL + 'hero-1.webp',
+import.meta.env.BASE_URL + 'Hero-2.webp',
+import.meta.env.BASE_URL + 'Hero-3.webp',
+import.meta.env.BASE_URL + 'Hero-4.webp',];
 
 function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
